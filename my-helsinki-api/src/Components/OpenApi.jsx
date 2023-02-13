@@ -4,7 +4,7 @@ import PlaceList from "./PlaceList";
 
 
 const OpenApi = () => {
-  const api = "http://localhost:8080";
+  const api = "http://localhost:8000";
   const [places, setPlaces] = useState({ data: [] });
 
   useEffect(() => {
