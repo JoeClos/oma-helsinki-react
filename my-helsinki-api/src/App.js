@@ -10,7 +10,7 @@ function App() {
        <Routes>
          {/* <OpenApi /> */}
          <Route path="/" element={<OpenApi />} />
-         <Route path="/place/:id" element={<Place />} />
+         <Route path="/place/:placeId" element={<Place />} />
          
        </Routes>
      </BrowserRouter> 
