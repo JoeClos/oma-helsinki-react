@@ -13,6 +13,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardMedia from "@mui/material/CardMedia";
 import { styled } from "@mui/material/styles";
+import { Link} from "react-router-dom";
+
 
 
 const ExpandMore = styled((props) => {
@@ -30,10 +32,14 @@ const ExpandMore = styled((props) => {
 const CardPlace = ({place}) => {
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
-        setExpanded({
-          zoom: true,
-          // selectedCard: id,
-        });
+        if(expanded === false){
+            setExpanded({
+                zoom: true,
+              });
+      
+        }else{
+            setExpanded(false);
+        }
       };
     
 
@@ -70,6 +76,8 @@ const CardPlace = ({place}) => {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
+          <Link to={`/place/${place.id}`}>More</Link>
+
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -100,7 +108,6 @@ const CardPlace = ({place}) => {
             <Typography>{place.location.address.locality}</Typography>
           </CardContent>
         </Collapse>
-        <Collapse out={expanded}></Collapse>
       </Card>
   );
 };

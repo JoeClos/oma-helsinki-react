@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
+import { api } from "../config";
 
 
 const OpenApi = () => {
-  const api = "http://localhost:8000";
   const [places, setPlaces] = useState({ data: [] });
 
   useEffect(() => {
