@@ -2,6 +2,10 @@ const axios = require("axios");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb+srv://narik:narik@cluster0.agps2lc.mongodb.net/userDB?retryWrites=true&w=majority')
+
 const port = process.env.PORT || 8000;
 app.use(cors());
 
