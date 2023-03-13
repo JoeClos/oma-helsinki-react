@@ -2,6 +2,7 @@ import './App.css';
 import OpenApi from './Components/OpenApi';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Place from './Components/Place'
+import UsersForm from './Components/UsersForm';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
          {/* <OpenApi /> */}
          <Route path="/" element={<OpenApi />} />
          <Route path="/place/:placeId" element={<Place />} />
+         <Route path="/form" element={<UsersForm />} />
          
        </Routes>
      </BrowserRouter> 
