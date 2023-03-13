@@ -1,17 +1,40 @@
+// import * as dotenv from "dotenv";
+// require('dotenv').config()// 
+
 const axios = require("axios");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const UserModel = require('./models/Users')
 
+
+// mongoose.connect('mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.agps2lc.mongodb.net/userDB?retryWrites=true&w=majority')
 mongoose.connect('mongodb+srv://narik:narik@cluster0.agps2lc.mongodb.net/userDB?retryWrites=true&w=majority')
 
 const port = process.env.PORT || 8000;
+
+app.use(express.json())
 app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Welcome to CORS server 😁");
 });
+
+app.get("/getUsers", async (req, res) => {
+    const users = await UserModel.find();
+    console.log(users);
+    res.json(users)
+});
+
+app.post("/createUser", async (req, res) => {
+  const user = req.body
+  const newUser = new UserModel(user);
+  await newUser.save();
+
+  res.json(user);
+})
+
 app.get("/v2/places", (request, response) => {
   response.header({ "Access-Control-Allow-Origin": "*" });
   response.header({'Cache-control': 'public, max-age=300'})
