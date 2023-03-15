@@ -1,5 +1,5 @@
 // import * as dotenv from "dotenv"
-// require('dotenv').config()
+require('dotenv').config()
 
 const axios = require("axios");
 const express = require("express");
@@ -8,14 +8,13 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users')
 
-const USER = process.env.DB_USER;
-const PASSWORD = process.env.DB_PASSWORD;
+const URL = process.env.DB_URL;
 const port = process.env.PORT || 8000;
 app.use(express.json())
 app.use(cors());
 
 // mongoose.connect('mongodb+srv://USER:PASSWORD@cluster0.agps2lc.mongodb.net/userDB?retryWrites=true&w=majority')
-mongoose.connect('mongodb+srv://narik:narik@cluster0.agps2lc.mongodb.net/userDB?retryWrites=true&w=majority')
+mongoose.connect(URL)
 
 
 
