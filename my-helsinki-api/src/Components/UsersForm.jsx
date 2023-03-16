@@ -4,6 +4,8 @@ import axios from "axios";
 const UsersForm = () => {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [age, setAge] = useState(0);
   const [username, setUsername] = useState("");
 
@@ -17,12 +19,14 @@ const UsersForm = () => {
   const createUser = () => {
     axios
       .post("http://localhost:8000/createUser", {
-        name,
+        email,
         age,
         username,
+        name,
+        password
       })
       .then((response) => {
-        setListOfUsers([...listOfUsers, { name, age, username }]);
+        setListOfUsers([...listOfUsers, { name, age, username, email }]);
       });
   };
 
@@ -32,12 +36,20 @@ const UsersForm = () => {
         return (
           <div>
             <p>Name: {user.name}</p>
+            <p>Email: {user.email}</p>
             <p>Age: {user.age}</p>
             <p>Username: {user.username}</p>
           </div>
         );
       })}
       <div>
+        <input
+          type="email"
+          placeholder="Email..."
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
         <input
           type="text"
           placeholder="Name..."
@@ -50,6 +62,13 @@ const UsersForm = () => {
           placeholder="Age..."
           onChange={(event) => {
             setAge(event.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          onChange={(event) => {
+            setPassword(event.target.value);
           }}
         />
         <input

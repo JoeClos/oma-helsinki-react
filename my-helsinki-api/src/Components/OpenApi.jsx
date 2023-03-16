@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
 import { api } from "../config";
-
+import Navbar from "./Navbar";
 
 const OpenApi = () => {
   const [places, setPlaces] = useState({ data: [] });
@@ -22,12 +22,8 @@ const OpenApi = () => {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <h1>Hello, Helsinki!</h1>
-      <PlaceList 
-      places = {places}
-      />
-
-  
+      <Navbar />
+      <PlaceList places={places} />
     </div>
   );
 };

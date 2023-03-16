@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
@@ -29,6 +30,18 @@ const ExpandMore = styled((props) => {
   }));
   
 
+  const theme = createTheme();
+
+  theme.typography.p = {
+    fontSize: '1.4rem',
+    '@media (min-width:600px)': {
+      fontSize: '1.5rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '2rem',
+    },
+  };
+  
 const CardPlace = ({place}) => {
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
@@ -51,7 +64,14 @@ const CardPlace = ({place}) => {
               {place.name.fi.charAt(0)}
             </Avatar>
           }
+          titleTypographyProps={{
+            fontSize: 15,
+          }}
+          subheaderTypographyProps={{
+            fontSize: 13,
+          }}
           title={place.name.en}
+          style={{fontSize: "1rem"}}
           subheader={
             <a
               href={place.info_url}
@@ -65,9 +85,11 @@ const CardPlace = ({place}) => {
         />
 
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {place.description.intro}
-          </Typography>
+          <ThemeProvider theme={theme}>
+            <Typography variant="h5" color="text.secondary">
+              {place.description.intro}
+            </Typography>
+          </ThemeProvider>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">

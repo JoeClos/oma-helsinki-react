@@ -21,13 +21,13 @@ const PlaceList = ({ places }) => {
 
   return (
     <div>
-      <div style={{ display: "flex", listStyleType: "none"}}>
+      {/* <div style={{ display: "flex", listStyleType: "none"}}>
         <Pagination
           nPages={nPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-      </div>
+      </div> */}
 
       <Box
         sx={{

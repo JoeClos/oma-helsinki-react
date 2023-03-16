@@ -12,7 +12,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     <div style={{ padding: "2rem"}} className="container">
       <ul className="pagination justify-content-center">
         <li className="page-item">
-          <button className="page-link" onClick={prevPage}>
+          <button type="button" className="btn btn-info" onClick={prevPage}>
             Previous
           </button>
         </li>
@@ -23,14 +23,14 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
           >
             <button
               onClick={() => setCurrentPage(pgNumber)}
-              className="page-link"
+              type="button" className="btn btn-info"
             >
               {pgNumber}
             </button>
           </li>
         ))}
         <li className="page-item">
-          <button className="page-link" onClick={nextPage} >
+          <button type="button" className="btn btn-info" onClick={nextPage} >
             Next
           </button>
         </li>
