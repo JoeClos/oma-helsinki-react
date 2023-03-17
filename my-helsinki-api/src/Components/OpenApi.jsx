@@ -22,7 +22,7 @@ const OpenApi = () => {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <Navbar />
+      <div className="navbar"><Navbar/></div>
       <PlaceList places={places} />
     </div>
   );

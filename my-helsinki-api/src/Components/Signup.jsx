@@ -34,31 +34,32 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
-      <form action="POST">
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <input type="submit" onClick={login} />
-        {/* <button onClick={login}>Login</button> */}
-      </form>
-      <br />
-      <p>OR</p>
-      <br />
-
-      <Link to="/login">Login Page</Link>
+    <div className="signup-form">
+      <div >
+        <h1>Signup</h1>
+        <form action="POST">
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <input type="submit" onClick={login} />
+          {/* <button onClick={login}>Login</button> */}
+        </form>
+        <br />
+        <p>OR</p>
+        <br />
+        <Link to="/login">Login Page</Link>
+      </div>
     </div>
   );
 };

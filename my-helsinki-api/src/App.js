@@ -5,6 +5,7 @@ import Place from "./Components/Place";
 import UsersForm from "./Components/UsersForm";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import Password from "./Components/Password"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/form" element={<UsersForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/password" element={<Password />} />
         </Routes>
       </BrowserRouter>
     </section>

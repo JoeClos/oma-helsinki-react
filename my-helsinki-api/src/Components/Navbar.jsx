@@ -1,9 +1,43 @@
 import "../App.css";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useNavigate();
+
+  const login = (e) => {
+    e.preventDefault();
+
+    try {
+      axios
+        .post("http://localhost:8000/login", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.data === "exist") {
+            history("/home", { state: { id: email } });
+            // alert("welcome back user!")
+          } else if (res.data === "not exist") {
+            alert("User has not signed up");
+          }
+        })
+        .catch((e) => {
+          alert("Wrong details");
+          console.log(e);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
   return (
     <div>
-      <nav className="navbar navbar-default navbar-inverse" role="navigation">
+      <nav className="navbar navbar-default navbar-inverse" id="navbar" role="navigation" >
         <div className="container-fluid">
           <div className="navbar-header">
             <button
@@ -38,9 +72,9 @@ const Navbar = () => {
                 <p className="navbar-text">Already have an account?</p>
               </li>
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                <button className="dropdown-toggle" data-toggle="dropdown"  id="nav-login">
                   <b>Login</b> <span className="caret"></span>
-                </a>
+                </button>
                 <ul id="login-dp" className="dropdown-menu">
                   <li>
                     <div className="row">
@@ -48,7 +82,6 @@ const Navbar = () => {
                     
                         <form
                           className="form"
-                          role="form"
                           method="post"
                           action="login"
                           acceptCharset="UTF-8"
@@ -64,6 +97,9 @@ const Navbar = () => {
                               id="exampleInputEmail2"
                               placeholder="Email address"
                               required
+                              onChange={(e) => {
+                                setEmail(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="form-group">
@@ -76,15 +112,19 @@ const Navbar = () => {
                               id="exampleInputPassword2"
                               placeholder="Password"
                               required
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                              }}
                             />
                             <div className="help-block text-right">
-                              <a href="">Forget the password ?</a>
+                              <Link to="/password">Forget the password?</Link>
                             </div>
                           </div>
                           <div className="form-group">
                             <button
                               type="submit"
                               className="btn btn-primary btn-block"
+                              onClick={login}
                             >
                               Sign in
                             </button>
@@ -98,9 +138,9 @@ const Navbar = () => {
                       </div>
                       <div className="bottom text-center">
                         New here ?{" "}
-                        <a >
-                          <b>Join Us</b>
-                        </a>
+                        <Link to="/signup">
+                          <b>Register</b>
+                        </Link>
                       </div>
                     </div>
                   </li>
