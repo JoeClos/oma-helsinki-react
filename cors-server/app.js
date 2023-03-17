@@ -18,6 +18,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to CORS server 😁");
 });
 
+
+// Fetch all users
 app.get("/getUsers", async (req, res) => {
   const users = await UserModel.find();
   console.log(users);
@@ -32,6 +34,54 @@ app.post("/createUser", async (req, res) => {
   res.json(user);
 });
 
+app.post("/signup", async (req, res) => {
+  const {email, name, age, username, password} = req.body;
+
+  const data = {
+    email: email,
+    name: name,
+    age: age,
+    username: username,
+    password: password,
+  };
+
+  try {
+    const check = await UserModel.findOne({ email: email });
+
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("not exist");
+      await UserModel.insertMany([data]).save();
+    }
+  } catch(e) {
+    res.json("not exist");
+  }
+
+  // const newUser = new UserModel(user);
+  // await newUser.save();
+
+  // res.json(user);
+});
+
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const check = await UserModel.findOne({ email:email });
+
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("not exist");
+    }
+  } catch(e) {
+    res.json("not exist");
+  }
+});
+
+// Fetching data from v2 places
 app.get("/v2/places", (request, response) => {
   response.header({ "Access-Control-Allow-Origin": "*" });
   response.header({ "Cache-control": "public, max-age=300" });
@@ -45,6 +95,7 @@ app.get("/v2/places", (request, response) => {
       console.log(err);
     });
 });
+
 app.get("/v2/place/:id", (request, response) => {
   response.header({ "Access-Control-Allow-Origin": "*" });
   response.header({ "Cache-control": "public, max-age=300" });
